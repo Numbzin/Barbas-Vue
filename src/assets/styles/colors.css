@@ -1,0 +1,30 @@
+body {
+  color: var(--text-color);
+  background-color: var(--main-color);
+}
+
+.bg-main {
+  background-color: var(--main-color);
+}
+
+.text-main {
+  color: var(--main-color) !important;
+}
+
+.bg-yellow {
+  background-color: var(--main-color);
+}
+
+.bg-black {
+  background-color: var(--bg-color);
+}
+
+.btn-custom {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.btn-custom:hover {
+  background-color: var(--text-color);
+  color: var(--black);
+}

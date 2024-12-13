@@ -1,0 +1,21 @@
+:root {
+  /* Cores de fundo */
+  --bg-color: #000000;
+  --second-bg-color: #a67c52;
+  --third-bg-color: #ffffff;
+
+  /* Texto */
+  --text-color: #ffffff;
+
+  /* Cores principais */
+  --main-color: #a67c52;
+  --hover-color: #d88f4e;
+
+  /* Efeitos e transições */
+  --transition-smooth: all 0.3s ease-in-out;
+  --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.445);
+}
+
+* {
+  box-sizing: border-box;
+}

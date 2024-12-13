@@ -1,0 +1,9 @@
+/* fontes */
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Slab:wght@100..900&display=swap");
+
+/* styles */
+@import url(../styles/root.css);
+@import url(../styles/colors.css);
+@import url(../styles/form.css);
+@import url(../styles/animation.css);
+@import url(../styles/responsive.css);
