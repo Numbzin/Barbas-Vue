@@ -1,5 +1,5 @@
 <template>
-  <body
+  <div
     class="d-flex align-items-center justify-content-center"
     style="min-height: 100vh"
   >
@@ -21,7 +21,7 @@
                       <i class="fas fa-user"></i>
                     </span>
                     <input
-                      v-model="name"
+                      v-model="person.name"
                       type="text"
                       class="form-control"
                       id="nameInput"
@@ -42,7 +42,7 @@
                       <i class="fas fa-phone"></i>
                     </span>
                     <input
-                      v-model="tel"
+                      v-model="person.telephone"
                       type="tel"
                       class="form-control"
                       id="telInput"
@@ -63,7 +63,7 @@
                       <i class="fas fa-envelope"></i>
                     </span>
                     <input
-                      v-model="email"
+                      v-model="person.email"
                       type="email"
                       class="form-control"
                       id="emailInput"
@@ -84,7 +84,7 @@
                       <i class="fas fa-lock"></i>
                     </span>
                     <input
-                      v-model="password"
+                      v-model="person.password"
                       type="password"
                       class="form-control"
                       id="passwordInput"
@@ -156,12 +156,14 @@
         </div>
       </div>
     </div>
-  </body>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { Person } from "@/core/domain/Person";
 
+const person = ref(new Person());
 const name = ref("");
 const nameMessage = ref("");
 const email = ref("");

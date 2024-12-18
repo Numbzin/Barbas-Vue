@@ -25,24 +25,26 @@
     <div class="collapse navbar-collapse mx-auto" id="navbarNav">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/#inicio">Inicio</a>
+          <router-link class="nav-link" to="/#inicio">Inicio</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/#cortes">Cortes</a>
+          <router-link class="nav-link" to="/#cortes">Cortes</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/#agendamento">Agendamento</a>
+          <router-link class="nav-link" to="/#agendamento"
+            >Agendamento</router-link
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/#contato">Contato</a>
+          <router-link class="nav-link" to="/#contato">Contato</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/#about">Sobre Nós</a>
+          <router-link class="nav-link" to="/#about">Sobre Nós</router-link>
         </li>
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/login">Entrar</a>
+          <router-link class="nav-link" to="/login">Entrar</router-link>
         </li>
       </ul>
     </div>
