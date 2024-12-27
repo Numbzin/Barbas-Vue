@@ -13,7 +13,7 @@
               <h3 class="mb-0">Cadastro</h3>
             </div>
             <div class="card-body p-4 bg-main">
-              <form action="#" id="formPersonAdd" enctype="multipart/form-data">
+              <form id="formPersonAdd" enctype="multipart/form-data">
                 <div class="mb-3">
                   <label for="nameInput" class="form-label">Nome</label>
                   <div class="input-group">
@@ -25,7 +25,7 @@
                       type="text"
                       class="form-control"
                       id="nameInput"
-                      @blur="validateName"
+                      @input="validateName"
                       placeholder="Digite seu nome"
                       required
                     />
@@ -67,7 +67,7 @@
                       type="email"
                       class="form-control"
                       id="emailInput"
-                      @keyup="validateEmail"
+                      @input="validateEmail"
                       placeholder="Digite seu email"
                       required
                     />
@@ -88,14 +88,12 @@
                       type="password"
                       class="form-control"
                       id="passwordInput"
-                      @keyup="validatePassword"
+                      @input="validatePassword"
                       placeholder="Digite sua senha"
                       required
                     />
                   </div>
-                  <div class="form-text text-danger">
-                    {{ passwordMessage }}
-                  </div>
+                  <div class="form-text text-danger">{{ passwordMessage }}</div>
                 </div>
 
                 <div class="mb-3">
@@ -111,7 +109,7 @@
                       type="password"
                       class="form-control"
                       id="confPasswordInput"
-                      @keyup="validatePasswordMatch"
+                      @input="validatePasswordMatch"
                       placeholder="Confirme sua senha"
                       required
                     />
@@ -144,7 +142,7 @@
                   </button>
                   <button
                     type="button"
-                    id="submitForm"
+                    @click="handleSubmit"
                     class="btn btn-custom w-50"
                   >
                     Enviar
@@ -161,29 +159,27 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { addPerson } from "@/core/services/personRepository";
 import { Person } from "@/core/domain/Person";
 
 const person = ref(new Person());
-const name = ref("");
-const nameMessage = ref("");
-const email = ref("");
-const emailMessage = ref("");
-const tel = ref("");
-const telMessage = ref("");
-const password = ref("");
-const passwordMessage = ref("");
 const confPassword = ref("");
+
+const nameMessage = ref("");
+const telMessage = ref("");
+const emailMessage = ref("");
+const passwordMessage = ref("");
 const confPasswordMessage = ref("");
 
-// Funções de validação
 const validateName = () => {
-  const numberCount = (name.value.match(/\d/g) || []).length;
-  const onlyNumbers = /^\d+$/.test(name.value);
+  const nameValue = person.value.name;
+  const numberCount = (nameValue.match(/\d/g) || []).length;
+  const onlyNumbers = /^\d+$/.test(nameValue);
 
-  if (name.value.trim() === "") {
+  if (nameValue.trim() === "") {
     nameMessage.value = "Nome é obrigatório";
-  } else if (name.value.length < 3) {
-    nameMessage.value = "O nome deve ter pelo menos 3 caracteres";
+  } else if (nameValue.length < 4) {
+    nameMessage.value = "O nome deve ter pelo menos 4 caracteres";
   } else if (onlyNumbers) {
     nameMessage.value = "O nome não pode conter apenas números";
   } else if (numberCount > 4) {
@@ -193,62 +189,75 @@ const validateName = () => {
   }
 };
 
-const validateEmail = () => {
-  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-  if (email.value.trim() === "") {
-    emailMessage.value = "Email é obrigatório";
-  } else if (!emailPattern.test(email.value)) {
-    emailMessage.value = "Formato de email inválido";
-  } else {
-    emailMessage.value = "";
+const validateTel = () => {
+  let value = person.value.telephone.replace(/\D/g, "");
+  if (value.length <= 11) {
+    if (value.length > 2) value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+    if (value.length > 9) value = value.slice(0, 10) + "-" + value.slice(10);
+    person.value.telephone = value;
   }
+  const telPattern = /^\(\d{2}\)\s\d{5}-\d{4}$/;
+  telMessage.value = telPattern.test(value)
+    ? ""
+    : "Formato de telefone inválido";
 };
 
-const validateTel = () => {
-  let value = tel.value.replace(/\D/g, "");
-
-  if (value.length <= 11) {
-    if (value.length > 2) {
-      value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
-    }
-    if (value.length > 9) {
-      value = value.slice(0, 10) + "-" + value.slice(10);
-    }
-    tel.value = value;
-  }
-
-  const telPattern = /^\(\d{2}\)\s\d{5}-\d{4}$/;
-  if (value.replace(/\D/g, "").length === 0) {
-    telMessage.value = "Telefone é obrigatório";
-  } else if (!telPattern.test(tel.value)) {
-    telMessage.value = "Formato de telefone inválido";
-  } else {
-    telMessage.value = "";
-  }
+const validateEmail = () => {
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  emailMessage.value = emailPattern.test(person.value.email)
+    ? ""
+    : "Formato de email inválido";
 };
 
 const validatePassword = () => {
   const passwordPattern =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-  if (password.value === "") {
-    passwordMessage.value = "Senha é obrigatória";
-  } else if (!passwordPattern.test(password.value)) {
-    passwordMessage.value =
-      "A senha deve conter pelo menos 8 caracteres, incluindo maiúsculas, minúsculas, números e caracteres especiais";
-  } else {
-    passwordMessage.value = "";
-  }
+  passwordMessage.value = passwordPattern.test(person.value.password)
+    ? ""
+    : "A senha deve conter ao menos 8 caracteres, maiúsculas, números e caracteres especiais";
 };
 
 const validatePasswordMatch = () => {
-  if (confPassword.value === "") {
-    confPasswordMessage.value = "Confirmação de senha é obrigatória";
-  } else if (confPassword.value !== password.value) {
-    confPasswordMessage.value = "As senhas não coincidem";
-  } else {
-    confPasswordMessage.value = "";
+  confPasswordMessage.value =
+    confPassword.value === person.value.password
+      ? ""
+      : "As senhas não coincidem";
+};
+
+const handleSubmit = async () => {
+  validateName();
+  validateTel();
+  validateEmail();
+  validatePassword();
+  validatePasswordMatch();
+
+  if (
+    !nameMessage.value &&
+    !telMessage.value &&
+    !emailMessage.value &&
+    !passwordMessage.value &&
+    !confPasswordMessage.value
+  ) {
+    try {
+      await addPerson({
+        name: person.value.name,
+        telephone: person.value.telephone,
+        email: person.value.email,
+        password: person.value.password,
+        typePerson: "Pessoa Física",
+        typeAccess: "Usuário",
+        isActive: true,
+      });
+      alert("Cadastro realizado com sucesso!");
+      person.value = new Person();
+      confPassword.value = "";
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        alert("Erro ao cadastrar: " + error.message);
+      } else {
+        alert("Erro desconhecido ao cadastrar.");
+      }
+    }
   }
 };
 </script>

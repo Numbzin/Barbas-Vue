@@ -1,5 +1,14 @@
-* text=auto eol=lf
+# Defina os arquivos de imagem como binários para evitar a conversão de texto
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg binary
+
+# Defina arquivos de código-fonte como texto com final de linha LF
 *.vue text eol=lf
 *.ts text eol=lf
-*.vue text eol=lf
-* text eol=lf
+*.js text eol=lf
+
+
+* text=auto eol=lf

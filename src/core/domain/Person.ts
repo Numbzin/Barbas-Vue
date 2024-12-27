@@ -6,7 +6,7 @@ export class Person {
   gender?: string;
   photo?: string;
   typePerson: string; // "fisica" ou "juridica"
-  typeAccess: string; // "client" ou "gestor"
+  typeAccess: string; // "cliente" ou "gestor"
   password: string;
   isActive: boolean;
   // address?: Address;
@@ -27,4 +27,4 @@ export class Person {
   }
 }
 
-// export default new Person(); // Caso deseje exportar uma instância padrão de Person
+// export default new Person();
