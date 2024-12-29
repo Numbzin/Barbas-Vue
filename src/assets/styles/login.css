@@ -146,7 +146,7 @@ body {
 }
 
 .forgot a {
-  color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .register {
@@ -155,5 +155,82 @@ body {
 
 .register a {
   font-weight: 500;
-  color: var(--bg-color);
+  color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 15px;
+  }
+
+  .login-box {
+    width: 90%;
+    padding: 2em 1.5em 3em 1.5em;
+  }
+
+  .login-header {
+    width: 120px;
+    height: 60px;
+  }
+
+  .login-header span {
+    font-size: 24px;
+  }
+
+  .input-field {
+    font-size: 14px;
+    height: 50px;
+  }
+
+  .input-submit {
+    height: 45px;
+    font-size: 14px;
+  }
+
+  .remember-forgot {
+    font-size: 13px;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-header {
+    width: 100px;
+    height: 50px;
+  }
+
+  .login-header span {
+    font-size: 20px;
+  }
+
+  .login-box {
+    padding: 4em 1em 2em 1em;
+  }
+
+  .input-field {
+    font-size: 12px;
+    height: 45px;
+  }
+
+  .label {
+    font-size: 12px;
+  }
+
+  .icon {
+    position: absolute;
+    top: 14px;
+    right: 25px;
+    font-size: 20px;
+  }
+
+  .input-submit {
+    height: 40px;
+    font-size: 12px;
+  }
+
+  .remember-forgot {
+    font-size: 12px;
+    text-align: center;
+  }
 }

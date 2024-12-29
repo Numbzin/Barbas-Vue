@@ -30,7 +30,10 @@
           <input type="submit" class="input-submit" value="Entrar" />
         </div>
         <div class="register">
-          <span>Não tem uma conta? <a href="/register">Registre-se</a></span>
+          <span
+            >Não tem uma conta?
+            <a class="register-link" href="/register">Registre-se</a></span
+          >
         </div>
       </div>
     </div>

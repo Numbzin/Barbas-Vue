@@ -25,26 +25,24 @@
     <div class="collapse navbar-collapse mx-auto" id="navbarNav">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <router-link class="nav-link" to="/#inicio">Inicio</router-link>
+          <a class="nav-link" href="/#inicio">Inicio</a>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/#cortes">Cortes</router-link>
+          <a class="nav-link" href="/#cortes">Cortes</a>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/#agendamento"
-            >Agendamento</router-link
-          >
+          <a class="nav-link" href="/#agendamento">Agendamento</a>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/#contato">Contato</router-link>
+          <a class="nav-link" href="/#contato">Contato</a>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/#about">Sobre Nós</router-link>
+          <a class="nav-link" href="/#about">Sobre Nós</a>
         </li>
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <router-link class="nav-link" to="/login">Entrar</router-link>
+          <a class="nav-link" href="/login">Entrar</a>
         </li>
       </ul>
     </div>
@@ -54,32 +52,24 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
-// Estado reativo que controla se a navbar tem opacidade ou não
 const isScrolled = ref(false);
 
-// A referência da navbar
 const navbar = ref<HTMLElement | null>(null);
 
-// Função que adiciona o listener de scroll
 const handleScroll = () => {
   if (navbar.value) {
-    // Verifica o valor de scrollY e aplica a classe de opacidade
-    console.log("ScrollY:", window.scrollY); // Verifique o valor de scrollY
+    console.log("ScrollY:", window.scrollY);
     isScrolled.value = window.scrollY > 0;
-    console.log("isScrolled:", isScrolled.value); // Verifique se a variável de estado foi atualizada corretamente
+    console.log("isScrolled:", isScrolled.value);
   }
 };
 
-// Adiciona o evento de scroll quando o componente for montado
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
-  console.log("Evento de scroll adicionado.");
 });
 
-// Remove o evento de scroll quando o componente for destruído
 onBeforeUnmount(() => {
   window.removeEventListener("scroll", handleScroll);
-  console.log("Evento de scroll removido.");
 });
 </script>
 
@@ -144,7 +134,11 @@ onBeforeUnmount(() => {
 
 .nav-link:hover {
   transition: 0.46s;
-  color: var(--text-color) !important;
+  color: var(--text-color);
+}
+
+.nav-item a:active {
+  color: #fff;
 }
 
 .navbar-expand-lg {

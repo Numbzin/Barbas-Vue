@@ -146,7 +146,7 @@
       <li class=""><a href="#cortes">Cortes</a></li>
       <li class=""><a href="#agendamento">Agendamento</a></li>
       <li class=""><a href="#contato">Contato</a></li>
-      <li class=""><a href="login.html">Login</a></li>
+      <li class=""><a href="/login.html">Login</a></li>
     </ul>
     <p class="copy">&copy; Barber's Cut's | All Rights Reserved.</p>
   </footer>
@@ -165,7 +165,6 @@ const form = ref({
   hora: "",
 });
 
-// Funções
 const openModal = () => {
   showModal.value = true;
 };
