@@ -32,7 +32,7 @@ export async function queryActivePersons(): Promise<DocumentData[]> {
     const q = query(collection(db, "persons"), where("isActive", "==", true));
     const querySnapshot = await getDocs(q);
     const persons: DocumentData[] = [];
-    querySnapshot.forEach((doc) => persons.push({ id: doc.id, ...doc.data() }));
+    querySnapshot.forEach(doc => persons.push({ id: doc.id, ...doc.data() }));
     return persons;
   } catch (error) {
     console.error("Erro ao buscar pessoas ativas:", error);
