@@ -1,7 +1,7 @@
 :root {
   /* Cores de fundo */
   --bg-color: #000000;
-  --second-bg-color: #a67c52;
+  --second-bg-color: #c59d5f;
   --third-bg-color: #ffffff;
 
   /* Texto */
@@ -9,7 +9,7 @@
 
   /* Cores principais */
   --main-color: #a67c52;
-  --hover-color: #d88f4e;
+  --hover-color: #c59d5f;
 
   /* Efeitos e transições */
   --transition-smooth: all 0.3s ease-in-out;

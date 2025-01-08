@@ -119,7 +119,7 @@ onBeforeUnmount(() => {
 }
 
 .navbar-nav li a {
-  color: var(--main-color);
+  color: #c59d5f;
 }
 
 .nav-item a {

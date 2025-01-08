@@ -1,11 +1,11 @@
 [
   {
-    "imgSrc": "./images/nmb.jpeg",
+    "imgSrc": "./images/cortes/corte_moderno.webp",
     "titulo": "Corte Moderno",
     "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
   {
-    "imgSrc": "./images/nmb.jpeg",
+    "imgSrc": "./images/cortes/barba_estilizada.jpg",
     "titulo": "Barba Estilizada",
     "descricao": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
   },
