@@ -6,6 +6,7 @@ node_modules
 # local env files
 .env.local
 .env.*.local
+.env
 
 # Log files
 npm-debug.log*
@@ -22,4 +23,3 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
-/src/core/infra/firebase-config.ts
