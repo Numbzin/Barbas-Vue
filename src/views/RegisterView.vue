@@ -1,144 +1,121 @@
 <template>
-  <body>
-    <div class="wrapper">
-      <div class="login-box">
-        <div class="login-header">
-          <span>Cadastro</span>
-        </div>
-        <form id="formPersonAdd" enctype="multipart/form-data">
-          <div v-if="currentStep === 1" class="form-step">
-            <div class="input-box">
-              <input
-                v-model="person.name"
-                type="text"
-                class="input-field"
-                id="nameInput"
-                @input="validateName"
-                required
-              />
-              <label for="nameInput" class="label">Nome</label>
-              <i class="fa-solid fa-user icon"></i>
-              <div id="nameHelp" class="form-text text-danger">
-                {{ nameMessage }}
-              </div>
-            </div>
-
-            <div class="input-box">
-              <input
-                v-model="person.telephone"
-                type="tel"
-                class="input-field"
-                id="telInput"
-                @input="validateTel"
-                required
-              />
-              <label for="telInput" class="label">Telefone</label>
-              <i class="fa-solid fa-phone icon"></i>
-              <div id="telHelp" class="form-text text-danger">
-                {{ telMessage }}
-              </div>
-            </div>
-
-            <div class="input-box">
-              <input
-                v-model="person.email"
-                type="email"
-                class="input-field"
-                id="emailInput"
-                @input="validateEmail"
-                required
-              />
-              <label for="emailInput" class="label">E-mail</label>
-              <i class="fa-solid fa-envelope icon"></i>
-              <div id="emailHelp" class="form-text text-danger">
-                {{ emailMessage }}
-              </div>
-            </div>
-
-            <div class="submit-form">
-              <button type="reset" @click="resetForm" class="input-submit">
-                Cancelar
-              </button>
-              <button type="button" @click="nextStep" class="input-submit">
-                Próximo
-              </button>
-            </div>
-          </div>
-
-          <div v-if="currentStep === 2" class="form-step">
-            <div class="input-box">
-              <input
-                v-model="person.password"
-                type="password"
-                class="input-field"
-                id="passwordInput"
-                @input="validatePassword"
-                required
-              />
-              <label for="passwordInput" class="label">Senha</label>
-              <i class="fa-solid fa-lock icon"></i>
-              <div class="form-text text-danger">{{ passwordMessage }}</div>
-            </div>
-
-            <div class="input-box">
-              <input
-                v-model="confPassword"
-                type="password"
-                class="input-field"
-                id="confPasswordInput"
-                @input="validatePasswordMatch"
-                required
-              />
-              <label for="confPasswordInput" class="label"
-                >Confirme a senha</label
-              >
-              <i class="fa-solid fa-lock icon"></i>
-              <div class="form-text text-danger">{{ confPasswordMessage }}</div>
-            </div>
-
-            <div class="input-box">
-              <div class="file-input-wrapper">
-                <input
-                  type="file"
-                  class="input-field file-input"
-                  id="photoInput"
-                  accept="image/*"
-                  @change="handleFileChange"
-                />
-                <label for="photoInput" class="file-label">
-                  <i class="fa-solid fa-camera icon"></i>
-                  <span class="file-text">Escolher arquivo</span>
-                </label>
-                <span class="file-name" v-if="selectedFile">
-                  {{ selectedFile.name }}
-                </span>
-              </div>
-            </div>
-
-            <div class="submit-form">
-              <button type="button" @click="previousStep" class="input-submit">
-                Voltar
-              </button>
-              <button type="button" @click="handleSubmit" class="input-submit">
-                Enviar
-              </button>
-            </div>
-          </div>
-
-          <div class="step-indicator">
-            <div class="step" :class="{ active: currentStep === 1 }"></div>
-            <div class="step" :class="{ active: currentStep === 2 }"></div>
-          </div>
-        </form>
+  <div class="wrapper">
+    <div class="login-box">
+      <div class="login-header">
+        <span>Cadastro</span>
       </div>
+      <form id="formPersonAdd" enctype="multipart/form-data">
+        <div v-if="currentStep === 1" class="form-step">
+          <CustomInput
+            v-model="person.name"
+            label="Nome"
+            id="nameInput"
+            icon="user"
+            :error-message="nameMessage"
+            @input="validateName"
+          />
+
+          <CustomInput
+            v-model="person.telephone"
+            type="tel"
+            label="Telefone"
+            id="telInput"
+            icon="phone"
+            :error-message="telMessage"
+            @input="validateTel"
+          />
+
+          <CustomInput
+            v-model="person.email"
+            type="email"
+            label="E-mail"
+            id="emailInput"
+            icon="email"
+            :error-message="emailMessage"
+            @input="validateEmail"
+          />
+
+          <div class="submit-form">
+            <button type="reset" @click="resetForm" class="input-submit">
+              Cancelar
+            </button>
+            <button type="button" @click="nextStep" class="input-submit">
+              Próximo
+            </button>
+          </div>
+        </div>
+
+        <div v-if="currentStep === 2" class="form-step">
+          <CustomInput
+            v-model="person.password"
+            type="password"
+            label="Senha"
+            id="passwordInput"
+            icon="password"
+            :error-message="passwordMessage"
+            @input="validatePassword"
+          />
+
+          <CustomInput
+            v-model="confPassword"
+            type="password"
+            label="Confirme a senha"
+            id="confPasswordInput"
+            icon="password"
+            :error-message="confPasswordMessage"
+            @input="validatePasswordMatch"
+          />
+
+          <div class="input-box">
+            <div class="file-input-wrapper">
+              <input
+                type="file"
+                class="input-field file-input"
+                id="photoInput"
+                accept="image/*"
+                @change="handleFileChange"
+              />
+              <label for="photoInput" class="file-label">
+                <i class="fa-solid fa-camera icon"></i>
+                <span class="file-text">Escolher arquivo</span>
+              </label>
+              <span class="file-name" v-if="selectedFile">
+                {{ selectedFile.name }}
+              </span>
+            </div>
+          </div>
+
+          <div class="submit-form">
+            <button type="button" @click="previousStep" class="input-submit">
+              Voltar
+            </button>
+            <button type="button" @click="handleSubmit" class="input-submit">
+              Enviar
+            </button>
+          </div>
+        </div>
+
+        <div class="step-indicator">
+          <div class="step" :class="{ active: currentStep === 1 }"></div>
+          <div class="step" :class="{ active: currentStep === 2 }"></div>
+        </div>
+      </form>
     </div>
-  </body>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { addPerson } from "@/core/services/personRepository";
 import { Person } from "@/core/domain/Person";
+import { addPerson } from "@/core/services/personRepository";
+import CustomInput from "../components/InputValue.vue";
+import {
+  validateName as validateNameUtil,
+  validateTelephone,
+  validateEmail as validateEmailUtil,
+  validatePassword as validatePasswordUtil,
+  validatePasswordMatch as validatePasswordMatchUtil,
+} from "../core/utils/validator";
 
 const currentStep = ref(1);
 const person = ref(new Person());
@@ -152,58 +129,31 @@ const passwordMessage = ref("");
 const confPasswordMessage = ref("");
 
 const validateName = () => {
-  const nameValue = person.value.name;
-  const numberCount = (nameValue.match(/\d/g) || []).length;
-  const onlyNumbers = /^\d+$/.test(nameValue);
-
-  if (nameValue.trim() === "") {
-    nameMessage.value = "Nome é obrigatório";
-  } else if (nameValue.length < 4) {
-    nameMessage.value = "O nome deve ter pelo menos 4 caracteres";
-  } else if (onlyNumbers) {
-    nameMessage.value = "O nome não pode conter apenas números";
-  } else if (numberCount > 4) {
-    nameMessage.value = "O nome não pode ter mais de 4 números";
-  } else {
-    nameMessage.value = "";
-  }
+  nameMessage.value = validateNameUtil(person.value.name);
 };
 
 const validateTel = () => {
-  let value = person.value.telephone.replace(/\D/g, "");
-  if (value.length <= 11) {
-    if (value.length > 2) value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
-    if (value.length > 9) value = value.slice(0, 10) + "-" + value.slice(10);
-    person.value.telephone = value;
-  }
-  const telPattern = /^\(\d{2}\)\s\d{5}-\d{4}$/;
-  telMessage.value = telPattern.test(value)
-    ? ""
-    : "Formato de telefone inválido";
+  const { formattedValue, error } = validateTelephone(person.value.telephone);
+  person.value.telephone = formattedValue;
+  telMessage.value = error;
 };
 
 const validateEmail = () => {
-  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  emailMessage.value = emailPattern.test(person.value.email)
-    ? ""
-    : "Formato de email inválido";
+  emailMessage.value = validateEmailUtil(person.value.email);
 };
 
 const validatePassword = () => {
-  const passwordPattern =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  passwordMessage.value = passwordPattern.test(person.value.password)
-    ? ""
-    : "A senha deve conter ao menos 8 caracteres, maiúsculas, números e caracteres especiais";
+  passwordMessage.value = validatePasswordUtil(person.value.password);
 };
 
 const validatePasswordMatch = () => {
-  confPasswordMessage.value =
-    confPassword.value === person.value.password
-      ? ""
-      : "As senhas não coincidem";
+  confPasswordMessage.value = validatePasswordMatchUtil(
+    person.value.password,
+    confPassword.value
+  );
 };
 
+// Rest of the component methods remain the same
 const handleFileChange = (event: Event) => {
   const input = event.target as HTMLInputElement;
   if (input.files && input.files.length > 0) {
@@ -515,7 +465,7 @@ body {
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(100px);
   }
   to {
     opacity: 1;
@@ -527,10 +477,6 @@ body {
   .login-box {
     margin: 0 25px;
     padding: 4.5em 2.5em 4em 1.5em;
-  }
-
-  .remember-forgot {
-    flex-direction: column;
   }
 
   .input-submit {
