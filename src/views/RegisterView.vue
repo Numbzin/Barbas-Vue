@@ -6,7 +6,7 @@
       </div>
       <form id="formPersonAdd" enctype="multipart/form-data">
         <div v-if="currentStep === 1" class="form-step">
-          <CustomInput
+          <InputValue
             v-model="person.name"
             label="Nome"
             id="nameInput"
@@ -15,7 +15,7 @@
             @input="validateName"
           />
 
-          <CustomInput
+          <InputValue
             v-model="person.telephone"
             type="tel"
             label="Telefone"
@@ -25,7 +25,7 @@
             @input="validateTel"
           />
 
-          <CustomInput
+          <InputValue
             v-model="person.email"
             type="email"
             label="E-mail"
@@ -46,7 +46,7 @@
         </div>
 
         <div v-if="currentStep === 2" class="form-step">
-          <CustomInput
+          <InputValue
             v-model="person.password"
             type="password"
             label="Senha"
@@ -56,7 +56,7 @@
             @input="validatePassword"
           />
 
-          <CustomInput
+          <InputValue
             v-model="confPassword"
             type="password"
             label="Confirme a senha"
@@ -108,7 +108,7 @@
 import { ref } from "vue";
 import { Person } from "@/core/domain/Person";
 import { addPerson } from "@/core/services/personRepository";
-import CustomInput from "../components/InputValue.vue";
+import InputValue from "../components/InputValue.vue";
 import {
   validateName as validateNameUtil,
   validateTelephone,
@@ -153,7 +153,6 @@ const validatePasswordMatch = () => {
   );
 };
 
-// Rest of the component methods remain the same
 const handleFileChange = (event: Event) => {
   const input = event.target as HTMLInputElement;
   if (input.files && input.files.length > 0) {
