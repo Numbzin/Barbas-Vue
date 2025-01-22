@@ -8,12 +8,24 @@
           <span>Login</span>
         </div>
         <div class="input-box">
-          <input type="text" id="user" class="input-field" required />
+          <input
+            v-model="email"
+            type="text"
+            id="user"
+            class="input-field"
+            required
+          />
           <label for="user" class="label">Usuário</label>
           <i class="fa-solid fa-user icon"></i>
         </div>
         <div class="input-box">
-          <input type="password" id="pass" class="input-field" required />
+          <input
+            v-model="senha"
+            type="password"
+            id="pass"
+            class="input-field"
+            required
+          />
           <label for="pass" class="label">Senha</label>
           <i class="fa-solid fa-lock icon"></i>
         </div>
@@ -27,7 +39,9 @@
           </div>
         </div>
         <div class="input-box">
-          <input type="submit" class="input-submit" value="Entrar" />
+          <button type="submit" class="input-submit" @click="sendLoginEmail">
+            Entrar
+          </button>
         </div>
         <div class="register">
           <span
@@ -40,7 +54,18 @@
   </body>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { authService } from "@/core/services/auth.service";
+import { ref } from "vue";
+
+const email = ref("");
+const senha = ref("");
+
+function sendLoginEmail() {
+  authService.loginEmail(email.value, senha.value);
+}
+authService;
+</script>
 
 <style scoped>
 @import "../assets/styles/login.css";

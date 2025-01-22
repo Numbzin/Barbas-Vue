@@ -58,9 +58,7 @@ const navbar = ref<HTMLElement | null>(null);
 
 const handleScroll = () => {
   if (navbar.value) {
-    console.log("ScrollY:", window.scrollY);
     isScrolled.value = window.scrollY > 0;
-    console.log("isScrolled:", isScrolled.value);
   }
 };
 
